@@ -1,0 +1,10 @@
+{% extends 'financas/base.html' %}{% load socialaccount %}
+{% block title %}Entrar{% endblock %}
+{% block auth_content %}
+<div class="auth-page"><div class="auth-visual"><div class="auth-brand"><span class="brand-icon">₣</span> meu<span class="brand-light">financeiro</span></div><div class="visual-copy"><span class="eyebrow">SUA VIDA FINANCEIRA, EM EQUILÍBRIO</span><h1>Mais clareza para suas escolhas. Mais tranquilidade para seus planos.</h1><p>Tenha suas receitas, despesas e objetivos em um só lugar.</p></div><div class="visual-foot">Controle simples. Decisões melhores.</div></div>
+<div class="auth-form-wrap"><div class="auth-form"><div class="mobile-brand">₣ meu financeiro</div><span class="eyebrow dark">BEM-VINDO DE VOLTA</span><h2>Acesse sua conta</h2><p class="muted">Entre para acompanhar sua vida financeira.</p>
+{% if erro %}<div class="alert error">{{ erro }}</div>{% endif %}
+<form method="post" class="form-stack">{% csrf_token %}<label>E-mail ou nome de usuário<input type="text" name="email" required autocomplete="username" placeholder="voce@email.com"></label><label>Senha<input type="password" name="senha" required autocomplete="current-password" placeholder="Sua senha"></label><button class="btn btn-primary btn-full">Entrar na minha conta</button></form>
+{% if google_login_enabled %}<div class="separator"><span>ou continue com</span></div><form method="post" action="{% provider_login_url 'google' %}">{% csrf_token %}<button class="btn btn-google btn-full"><b class="google-g">G</b> Entrar com Google</button></form>{% else %}<div class="setup-note">Login com Google: configure as credenciais no arquivo <code>.env</code> para habilitar.</div>{% endif %}
+<p class="auth-bottom">Ainda não tem uma conta? <a href="{% url 'cadastro' %}">Criar conta grátis</a></p></div></div></div>
+{% endblock %}
